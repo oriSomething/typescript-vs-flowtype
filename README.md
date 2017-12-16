@@ -400,6 +400,57 @@ type MappedType = {
 };
 ```
 
+## Function/methods overloading
+
+### Flow
+
+There is no documentation about this feature. But, in flow it's only possible to create function/method overloading through definitions only.
+
+```js
+declare function add(x: string, y: string): string;
+declare function add(x: number, y: number): number;
+
+declare class Adder {
+  add(x: string, y: string): string;
+  add(x: number, y: number): number;
+}
+```
+
+However, it's possible to create function overloading using declarations. Unfortunately, it's not possible for class method overload.
+
+```js
+declare function add(x: string, y: string): string;
+declare function add(x: number, y: number): number;
+function add(x, y) {
+  return x + y;
+}
+
+add(1, 1); // Ok
+add("1", "1"); // Ok
+add(1, "1"); // Error
+```
+
+### TypeScript
+
+TypeScript supports function overloading for both definitions and normal code.
+
+```ts
+class Adder {
+  add(x: string, y: string): string;
+  add(x: number, y: number): number;
+  add(x, y) {
+    return x + y;
+  }
+}
+
+
+function add(x: string, y: string): string;
+function add(x: number, y: number): number;
+function add(x, y) {
+  return x + y;
+}
+```
+
 ## Read-only Types
 
 ### Flow
